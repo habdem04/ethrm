@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-02-27 19:28:38.735520",
+ "description": "This enables departments to request overtime for their employees.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_4xhc",
+  "employee",
+  "naming_series",
+  "date",
+  "date_from",
+  "dateto",
+  "ot_type",
+  "total_hrs",
+  "department",
+  "remark",
+  "amended_from",
+  "section_break_jpmr",
+  "requested_by",
+  "requested_by_date",
+  "column_break_ogsp",
+  "request_approved_by",
+  "request_approved_by_date",
+  "is_request_approved",
+  "column_break_leed",
+  "checked_by_hrd",
+  "checked_by_hrd_date",
+  "is_checked_by_hrd",
+  "column_break_cwfa"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_4xhc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Overtime Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dateto",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "DateTo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_from",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Date From",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "ot_type",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "OT Type",
+   "options": "Overtime Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "total_hrs",
+   "fieldtype": "Float",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Total Hrs",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_jpmr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Data",
+   "label": "Requested By"
+  },
+  {
+   "fieldname": "requested_by_date",
+   "fieldtype": "Datetime",
+   "label": "Requested By Date"
+  },
+  {
+   "fieldname": "column_break_ogsp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "request_approved_by",
+   "fieldtype": "Data",
+   "label": "Request Approved By"
+  },
+  {
+   "fieldname": "column_break_leed",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_cwfa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "request_approved_by_date",
+   "fieldtype": "Datetime",
+   "label": "Request Approved By Date"
+  },
+  {
+   "fieldname": "checked_by_hrd",
+   "fieldtype": "Data",
+   "label": "Checked By HRD"
+  },
+  {
+   "fieldname": "checked_by_hrd_date",
+   "fieldtype": "Datetime",
+   "label": "Checked By HRD Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_request_approved",
+   "fieldtype": "Check",
+   "label": "Is Request Approved"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked_by_hrd",
+   "fieldtype": "Check",
+   "label": "Is Checked By HRD"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-02-27 21:41:24.683461",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Overtime Request",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "ot_type,employee",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "employee",
+ "track_changes": 1
+}
