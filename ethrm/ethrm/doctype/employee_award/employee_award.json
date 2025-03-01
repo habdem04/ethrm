@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-03-02 00:07:15.830197",
+ "description": "Use this to register Employees' award",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "award_date_ec",
+  "award_date_gc",
+  "is_internal_award",
+  "awarding_company",
+  "award_venue",
+  "awarded"
+ ],
+ "fields": [
+  {
+   "fieldname": "award_date_ec",
+   "fieldtype": "Data",
+   "label": "Award Date EC"
+  },
+  {
+   "fieldname": "award_date_gc",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Award Date GC"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_internal_award",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Is Internal Award"
+  },
+  {
+   "fieldname": "awarding_company",
+   "fieldtype": "Data",
+   "label": "Awarding Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "award_venue",
+   "fieldtype": "Data",
+   "label": "Award Venue",
+   "reqd": 1
+  },
+  {
+   "fieldname": "awarded",
+   "fieldtype": "Small Text",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Awarded"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-02 00:16:00.985704",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Employee Award",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
