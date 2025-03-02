@@ -241,6 +241,11 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+doc_events = {
+    "Employee": {
+        "on_update": "ethrm.empapi.sync_employee_to_xaf"
+    }
+}
 
 fixtures=[
     "Custom Field"
