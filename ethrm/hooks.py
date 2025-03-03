@@ -244,6 +244,9 @@ app_license = "mit"
 doc_events = {
     "Employee": {
         "on_update": "ethrm.empapi.sync_employee_to_xaf"
+    },
+    "Department": {
+        "on_update": "ethrm.deptapi.sync_department_to_xaf"
     }
 }
 
