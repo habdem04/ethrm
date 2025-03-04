@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-04 15:07:38.008444",
+ "doctype": "DocType",
+ "document_type": "Other",
+ "engine": "InnoDB",
+ "field_order": [
+  "from_ec_to_gc_conversion_section",
+  "from_ec_date",
+  "to_gc_date",
+  "gc_to_ec_conversion_section",
+  "from_gc_date",
+  "to_ec_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_ec_to_gc_conversion_section",
+   "fieldtype": "Section Break",
+   "label": "From EC To GC Conversion"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "from_ec_date",
+   "fieldtype": "Data",
+   "label": "From EC Date (DD/MM/YYY)"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "to_gc_date",
+   "fieldtype": "Date",
+   "label": "To GC Date"
+  },
+  {
+   "fieldname": "gc_to_ec_conversion_section",
+   "fieldtype": "Section Break",
+   "label": "GC to EC Conversion"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "from_gc_date",
+   "fieldtype": "Date",
+   "label": "From GC Date"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "to_ec_date",
+   "fieldtype": "Data",
+   "label": "To EC Date (DD/MM/YYY)",
+   "translatable": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "in_create": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-03-04 15:33:19.398510",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Ethiopian Date Convertor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "read_only": 1,
+ "show_preview_popup": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

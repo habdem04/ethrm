@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-04 10:04:28.145401",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_9box",
+  "employee",
+  "full_name",
+  "date_of_joining_ec",
+  "date_of_joining",
+  "column_break_jlce",
+  "in_probation_days",
+  "end_date_gc",
+  "status",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_9box",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Probation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "link_filters": "[[\"Employee\",\"employment_type\",\"=\",\"Probation\"]]",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
+  },
+  {
+   "fetch_from": "employee.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Date",
+   "label": "Date of Joining (GC)"
+  },
+  {
+   "bold": 1,
+   "fieldname": "in_probation_days",
+   "fieldtype": "Int",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "In Probation Days",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date_gc",
+   "fieldtype": "Date",
+   "label": "End Date GC"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nApproved\nRejected\nOn Evaluation\nEvaluated"
+  },
+  {
+   "fetch_from": "employee.custom_date_of_joining_ec",
+   "fieldname": "date_of_joining_ec",
+   "fieldtype": "Date",
+   "label": "Date of Joining (EC)"
+  },
+  {
+   "fieldname": "column_break_jlce",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-03-04 10:16:44.343807",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Employee Probation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
