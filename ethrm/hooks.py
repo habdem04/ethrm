@@ -247,6 +247,9 @@ doc_events = {
     },
     "Department": {
         "on_update": "ethrm.deptapi.sync_department_to_xaf"
+    },
+    "Designation": {
+        "on_update": "ethrm.Designationapi.sync_position_to_xaf"
     }
 }
 

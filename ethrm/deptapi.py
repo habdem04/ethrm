@@ -14,7 +14,7 @@ def sync_department_to_xaf(doc, method):
 
     try:
         # Extract field values from the document using .get()
-        department_id = doc.get('custom_payroll_dept_id')
+        department_id = doc.custom_payroll_dept_id
         department_name = doc.department_name.strip() if doc.department_name else None
         # Cost center is optional for .NET, so we don't enforce it
         cost_center = doc.payroll_cost_center.strip() if doc.payroll_cost_center else None
