@@ -8,13 +8,33 @@
   "section_break_9box",
   "employee",
   "full_name",
+  "department",
+  "designation",
+  "salary_grade",
+  "basic_salary",
+  "column_break_jlce",
   "date_of_joining_ec",
   "date_of_joining",
-  "column_break_jlce",
   "in_probation_days",
   "end_date_gc",
   "status",
-  "amended_from"
+  "amended_from",
+  "section_break_vuvw",
+  "note",
+  "section_break_myzh",
+  "prepared_by_hrd",
+  "transaction_date",
+  "prepared_by_signature",
+  "column_break_utvc",
+  "is_checked_by_hrd",
+  "checked_by_hrd",
+  "checked_by_date",
+  "checked_by_signature",
+  "column_break_jrae",
+  "is_approved_by_hrd",
+  "approved_by_hrd_head",
+  "hrd_head_approval_date",
+  "hrd_head_signature"
  ],
  "fields": [
   {
@@ -44,7 +64,12 @@
    "fetch_from": "employee.employee_name",
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name"
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "reqd": 1,
+   "translatable": 1
   },
   {
    "fetch_from": "employee.date_of_joining",
@@ -76,20 +101,129 @@
    "options": "Draft\nApproved\nRejected\nOn Evaluation\nEvaluated"
   },
   {
+   "fieldname": "column_break_jlce",
+   "fieldtype": "Column Break"
+  },
+  {
    "fetch_from": "employee.custom_date_of_joining_ec",
    "fieldname": "date_of_joining_ec",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "label": "Date of Joining (EC)"
   },
   {
-   "fieldname": "column_break_jlce",
+   "fieldname": "section_break_vuvw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note"
+  },
+  {
+   "fieldname": "approved_by_hrd_head",
+   "fieldtype": "Date",
+   "label": "Approved By HRD Head"
+  },
+  {
+   "fieldname": "hrd_head_approval_date",
+   "fieldtype": "Datetime",
+   "label": "HRD Head Approval Date"
+  },
+  {
+   "fieldname": "section_break_myzh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "checked_by_hrd",
+   "fieldtype": "Data",
+   "label": "Checked By HRD"
+  },
+  {
+   "fieldname": "checked_by_date",
+   "fieldtype": "Datetime",
+   "label": "Checked By Date"
+  },
+  {
+   "fieldname": "checked_by_signature",
+   "fieldtype": "Signature",
+   "label": "Checked BY Signature"
+  },
+  {
+   "fieldname": "column_break_jrae",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hrd_head_signature",
+   "fieldtype": "Signature",
+   "label": "HRD Head Signature"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked_by_hrd",
+   "fieldtype": "Check",
+   "label": "Is Checked By HRD"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_approved_by_hrd",
+   "fieldtype": "Check",
+   "label": "Is Approved By HRD"
+  },
+  {
+   "fieldname": "prepared_by_hrd",
+   "fieldtype": "Data",
+   "label": "Prepared By HRD"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Datetime",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "prepared_by_signature",
+   "fieldtype": "Signature",
+   "label": "Prepared By Signature"
+  },
+  {
+   "fieldname": "column_break_utvc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1,
+   "reqd": 1,
+   "translatable": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.custom_basic_salary",
+   "fieldname": "basic_salary",
+   "fieldtype": "Currency",
+   "label": "Basic Salary",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.salary_mode",
+   "fieldname": "salary_grade",
+   "fieldtype": "Data",
+   "label": "Salary Grade"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-04 10:16:44.343807",
+ "modified": "2025-03-04 16:52:03.334439",
  "modified_by": "Administrator",
  "module": "ethrm",
  "name": "Employee Probation",

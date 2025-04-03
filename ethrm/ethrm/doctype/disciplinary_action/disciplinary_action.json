@@ -1,0 +1,276 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-03-04 16:54:04.552164",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_m1ny",
+  "employee",
+  "naming_series",
+  "discipline_type",
+  "reference_letter",
+  "note",
+  "amended_from",
+  "column_break_omjh",
+  "start_date_ec",
+  "start_date_gc",
+  "duration_in_days",
+  "end_date_ec",
+  "end_date_gc",
+  "status",
+  "is_file_attached",
+  "section_break_knfr",
+  "attach_file",
+  "section_break_lyom",
+  "is_checked",
+  "checked_by",
+  "checked_by_date",
+  "checked_by_signature",
+  "column_break_cvys",
+  "is_approved",
+  "approved_by",
+  "approval_date",
+  "approved_by_signatue",
+  "section_break_dzyw",
+  "revoked_by",
+  "revoked_date",
+  "revoked_by_signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_m1ny",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Disciplinary Action",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Employee ",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "discipline_type",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Discipline Type",
+   "options": "Discipline Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_letter",
+   "fieldtype": "Data",
+   "label": "Reference Letter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_omjh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date_ec",
+   "fieldtype": "Data",
+   "label": "Start Date (EC)"
+  },
+  {
+   "fieldname": "start_date_gc",
+   "fieldtype": "Date",
+   "label": "Start Date (GC)",
+   "reqd": 1
+  },
+  {
+   "description": "The disciplinary measure lasts for a number of days of inaction.",
+   "fieldname": "duration_in_days",
+   "fieldtype": "Int",
+   "label": "Duration In Days ",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date_ec",
+   "fieldtype": "Data",
+   "label": "End Date (EC)"
+  },
+  {
+   "fieldname": "end_date_gc",
+   "fieldtype": "Date",
+   "label": "End Date (GC)"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nApproved\nRejected\nRevoked"
+  },
+  {
+   "fieldname": "section_break_lyom",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked",
+   "fieldtype": "Check",
+   "label": "Is Checked",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Data",
+   "label": "Checked By",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "checked_by_date",
+   "fieldtype": "Datetime",
+   "label": "Checked By Date",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "checked_by_signature",
+   "fieldtype": "Signature",
+   "label": "Checked By Signature",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "column_break_cvys",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_approved",
+   "fieldtype": "Check",
+   "label": "Is Approved",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Data",
+   "label": "Approved By",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "approval_date",
+   "fieldtype": "Datetime",
+   "label": "Approval Date",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "approved_by_signatue",
+   "fieldtype": "Signature",
+   "label": "Approved By Signatue",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "section_break_dzyw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "employee.leave_approver",
+   "fieldname": "revoked_by",
+   "fieldtype": "Link",
+   "label": "Revoked By",
+   "options": "Employee",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "revoked_date",
+   "fieldtype": "Date",
+   "label": "Revoked Date",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "revoked_by_signature",
+   "fieldtype": "Signature",
+   "label": "Revoked by Signature",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_file_attached",
+   "fieldtype": "Check",
+   "label": "Is File attached"
+  },
+  {
+   "fieldname": "section_break_knfr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attach_file",
+   "fieldtype": "Attach",
+   "label": "Attach File"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-03-04 18:11:14.604109",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Disciplinary Action",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
