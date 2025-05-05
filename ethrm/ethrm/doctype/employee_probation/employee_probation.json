@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:employee",
  "creation": "2025-03-04 10:04:28.145401",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -58,7 +59,8 @@
    "label": "Employee",
    "link_filters": "[[\"Employee\",\"employment_type\",\"=\",\"Probation\"]]",
    "options": "Employee",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fetch_from": "employee.employee_name",
@@ -220,13 +222,15 @@
    "label": "Salary Grade"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-04 16:52:03.334439",
+ "modified": "2025-05-05 14:29:04.969170",
  "modified_by": "Administrator",
  "module": "ethrm",
  "name": "Employee Probation",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -243,6 +247,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

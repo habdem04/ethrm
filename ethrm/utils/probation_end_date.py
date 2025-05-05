@@ -1,32 +1,38 @@
+# ethrm/utils/probation_end_date.py
+
 import frappe
 from datetime import datetime, timedelta
 
 @frappe.whitelist()
-def calculate_probation_end_date(start_date, in_probation_days):
+def calculate_probation_end_date(start_date):
     """
-    Calculate the probation end date given the Date of Joining (start_date) and 
-    the number of probation days (in_probation_days), skipping Sundays and holidays.
-    
+    Calculate the probation end date given the Date of Joining (start_date),
+    using the number of probation days configured in the single DocType 'Probation Setting',
+    skipping Sundays and holidays.
+
     :param start_date: A string in "YYYY-MM-DD" format.
-    :param in_probation_days: A string or integer representing working days.
     :return: The probation end date as a string in "YYYY-MM-DD" format.
     """
     try:
-        # Parse the start_date
-        start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
-        frappe.logger().info(f"Parsed Start Date: {start_date}")
+        # Parse the start date
+        doj = datetime.strptime(start_date, "%Y-%m-%d").date()
+        frappe.logger().info(f"Parsed Start Date: {doj}")
 
-        # Get holidays from Holiday Lists
-        holidays = get_holidays()
+        # Fetch probation length from the single DocType
+        settings = frappe.get_single("Probation Setting")
+        probation_days = int(settings.probation_in_days or 0)
+        frappe.logger().info(f"Probation Days from Setting: {probation_days}")
+
+        # Get the list of holiday dates
+        holidays = _get_holidays()
         frappe.logger().info(f"Holidays: {holidays}")
 
         working_days = 0
-        current_date = start_date
+        current_date = doj
 
-        # Loop until we reach the required number of working days
-        while working_days < int(in_probation_days):
+        # Count forward until we've accumulated probation_days working days
+        while working_days < probation_days:
             current_date += timedelta(days=1)
-            # Exclude Sundays (weekday 6) and holidays
             if current_date.weekday() != 6 and current_date not in holidays:
                 working_days += 1
             else:
@@ -38,13 +44,20 @@ def calculate_probation_end_date(start_date, in_probation_days):
         frappe.log_error(message=frappe.get_traceback(), title="Error in calculate_probation_end_date")
         frappe.throw(f"Error calculating probation end date: {e}")
 
-def get_holidays():
+
+def _get_holidays():
     """
     Fetch holiday dates from all active Holiday Lists.
     """
     holiday_lists = frappe.get_all("Holiday List", fields=["name"])
     holidays = []
-    for holiday_list in holiday_lists:
-        holiday_dates = frappe.get_all("Holiday", filters={"parent": holiday_list["name"]}, fields=["holiday_date"])
-        holidays.extend([frappe.utils.getdate(date["holiday_date"]) for date in holiday_dates])
+
+    for hl in holiday_lists:
+        dates = frappe.get_all(
+            "Holiday",
+            filters={"parent": hl["name"]},
+            fields=["holiday_date"]
+        )
+        holidays.extend([frappe.utils.getdate(d["holiday_date"]) for d in dates])
+
     return holidays

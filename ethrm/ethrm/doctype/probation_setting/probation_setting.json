@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-05 10:22:47.046202",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "include_holiday",
+  "probation_in_days"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "include_holiday",
+   "fieldtype": "Check",
+   "label": "Include Holiday"
+  },
+  {
+   "fieldname": "probation_in_days",
+   "fieldtype": "Int",
+   "label": "Probation In Days",
+   "non_negative": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-05-05 10:27:18.226418",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Probation Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

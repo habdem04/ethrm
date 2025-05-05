@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-04 16:04:33.839276",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "full_name",
+  "relation_type",
+  "date_of_birth_gc",
+  "phone_home",
+  "phone_mobile",
+  "email",
+  "address"
+ ],
+ "fields": [
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "relation_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Relation Type",
+   "options": "Relation Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth_gc",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Date of Birth (GC)"
+  },
+  {
+   "fieldname": "phone_home",
+   "fieldtype": "Data",
+   "label": "Phone (Home)"
+  },
+  {
+   "fieldname": "phone_mobile",
+   "fieldtype": "Data",
+   "label": "Phone (Mobile)"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-04 16:17:05.696905",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Family Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

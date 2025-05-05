@@ -241,17 +241,34 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+# app_include_js = "/assets/ethrm/js/employee_custom.js"
+doctype_js = {
+    "Employee": "public/js/employee_custom.js"
+}
+# in your_app/hooks.py
+
+# doc_events = {
+#     "Employee": {
+#         "after_insert": "ethrm.cp.on_employee_created"
+#     }
+# }
 doc_events = {
     "Employee": {
-        "on_update": "ethrm.empapi.sync_employee_to_xaf"
-    },
-    "Department": {
-        "on_update": "ethrm.deptapi.sync_department_to_xaf"
-    },
-    "Designation": {
-        "on_update": "ethrm.Designationapi.sync_position_to_xaf"
+        "after_insert": "ethrm.cp.on_employee_created"
     }
 }
+
+# doc_events = {
+#     "Employee": {
+#         "on_update": "ethrm.empapi.sync_employee_to_xaf"
+#     },
+#     "Department": {
+#         "on_update": "ethrm.deptapi.sync_department_to_xaf"
+#     },
+#     "Designation": {
+#         "on_update": "ethrm.Designationapi.sync_position_to_xaf"
+#     }
+# }
 
 fixtures=[
     "Custom Field"
