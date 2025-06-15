@@ -270,31 +270,7 @@ doc_events = {
 #     }
 # }
 
-# ethrm/hooks.py
-
 fixtures = [
-    # --- Export specific Client Scripts ---
-    {
-        "dt": "Client Script",
-        "filters": [
-            ["name", "in", [
-                "CS_Sales_Order_Alerts",
-                "CS_Item_Default_Values",
-                # add any other CS names here
-            ]]
-        ]
-    },
-    # --- Export specific Custom Fields ---
-    {
-        "dt": "Custom Field",
-        "filters": [
-            ["name", "in", [
-                # ERPNext names Custom Fields as "<DocType>-<field_name>"
-                "Employee-ethnicity",
-                "Employee-national_id",
-                "Leave Application-ethrm_approval_level",
-                # add your other custom field names here
-            ]]
-        ]
-    }
+    "Client Script",
+    "Custom Field"
 ]

@@ -1,1 +1,167 @@
-[]
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:30.043919",
+  "module": "ethrm",
+  "name": "Check If Employeement Type is Contract is True",
+  "script": "frappe.ui.form.on('Employee', {\r\n    employment_type: function(frm) {\r\n        if (frm.doc.employment_type === 'Contract') {\r\n            frm.set_value('custom_contract', 1);\r\n            frm.set_value('custom_regular', 0);\r\n        } else if (frm.doc.employment_type === 'Full-time' || frm.doc.employment_type === 'Probation') {\r\n            frm.set_value('custom_contract', 0);\r\n            frm.set_value('custom_regular', 1);\r\n        } else {\r\n            // Optional: Handle other employment types if needed\r\n            frm.set_value('custom_contract', 0);\r\n            frm.set_value('custom_regular', 0);\r\n        }\r\n    },\r\n\r\n    custom_contract: function(frm) {\r\n        if (frm.doc.custom_contract) {\r\n            frm.set_value('employment_type', 'Contract');\r\n            frm.set_value('custom_regular', 0); // Ensure only one custom field is true\r\n        } else {\r\n             // If custom_contract is unchecked, you might want to clear employment_type or set a default\r\n             // Depending on your business logic, you might not want to clear if custom_regular is true\r\n             if (!frm.doc.custom_regular) {\r\n                 frm.set_value('employment_type', ''); // Or a default value if applicable\r\n             }\r\n        }\r\n    },\r\n\r\n    custom_regular: function(frm) {\r\n        if (frm.doc.custom_regular) {\r\n            frm.set_value('employment_type', 'Full-time');\r\n            frm.set_value('custom_contract', 0); // Ensure only one custom field is true\r\n        } else {\r\n            // If custom_regular is unchecked, you might want to clear employment_type or set a default\r\n            // Depending on your business logic, you might not want to clear if custom_contract is true\r\n            if (!frm.doc.custom_contract) {\r\n                frm.set_value('employment_type', ''); // Or a default value if applicable\r\n            }\r\n        }\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.996283",
+  "module": "ethrm",
+  "name": "Convert Date of Joining to GC and Vise Versa",
+  "script": "frappe.ui.form.on('Employee', {\r\n    custom_date_of_joining_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_date_of_joining_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('date_of_joining', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    date_of_joining: function(frm) {\r\n        const gregorian_date = frm.doc.date_of_joining;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_date_of_joining_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.941785",
+  "module": "ethrm",
+  "name": "Convert Date Of Birth",
+  "script": "frappe.ui.form.on('Employee', {\r\n    custom_date_of_birth_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_date_of_birth_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('date_of_birth', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    date_of_birth: function(frm) {\r\n        const gregorian_date = frm.doc.date_of_birth;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_date_of_birth_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.883598",
+  "module": "ethrm",
+  "name": "External Experience Date Convertor",
+  "script": "// Employee External Work History (Child Table) Date Conversion\r\nfrappe.ui.form.on('Employee External Work History', {\r\n    // Ethiopian to Gregorian (From Date)\r\n    custom_from_date_ec: function(frm, cdt, cdn) {\r\n        const child_row = locals[cdt][cdn];\r\n        if (!child_row.custom_from_date_ec) return;\r\n        \r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: child_row.custom_from_date_ec },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frappe.model.set_value(cdt, cdn, 'custom_from_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    // Ethiopian to Gregorian (To Date)\r\n    custom_to_date_ec: function(frm, cdt, cdn) {\r\n        const child_row = locals[cdt][cdn];\r\n        if (!child_row.custom_to_date_ec) return;\r\n        \r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: child_row.custom_to_date_ec },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frappe.model.set_value(cdt, cdn, 'custom_to_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    // Gregorian to Ethiopian (From Date)\r\n    custom_from_date: function(frm, cdt, cdn) {\r\n        const child_row = locals[cdt][cdn];\r\n        if (!child_row.custom_from_date) return;\r\n        \r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: child_row.custom_from_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frappe.model.set_value(cdt, cdn, 'custom_from_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    // Gregorian to Ethiopian (To Date)\r\n    custom_to_date: function(frm, cdt, cdn) {\r\n        const child_row = locals[cdt][cdn];\r\n        if (!child_row.custom_to_date) return;\r\n        \r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: child_row.custom_to_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frappe.model.set_value(cdt, cdn, 'custom_to_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.788757",
+  "module": "ethrm",
+  "name": "Set External Work Experience Total Years",
+  "script": "frappe.ui.form.on('Employee External Work History', {\r\n    custom_to_date: function(frm, cdt, cdn) {\r\n        const child_row = locals[cdt][cdn];\r\n        \r\n        // Only calculate if both dates exist\r\n        if (!child_row.custom_from_date || !child_row.custom_to_date) {\r\n            frappe.model.set_value(cdt, cdn, 'total_experience', null);\r\n            return;\r\n        }\r\n\r\n        const from_date = new Date(child_row.custom_from_date);\r\n        const to_date = new Date(child_row.custom_to_date);\r\n\r\n        // Validate date order\r\n        if (from_date > to_date) {\r\n            frappe.msgprint(__('End date must be after start date'));\r\n            frappe.model.set_value(cdt, cdn, 'total_experience', 'Invalid date range');\r\n            return;\r\n        }\r\n\r\n        // Calculate months difference\r\n        let months = (to_date.getFullYear() - from_date.getFullYear()) * 12;\r\n        months += to_date.getMonth() - from_date.getMonth();\r\n        \r\n        // Adjust for day difference\r\n        if (to_date.getDate() < from_date.getDate()) {\r\n            months--;\r\n        }\r\n\r\n        // Convert to years and months\r\n        const years = Math.floor(months / 12);\r\n        const remaining_months = months % 12;\r\n\r\n        // Format the result\r\n        let experience = '';\r\n        if (years > 0) experience += `${years} year${years !== 1 ? 's' : ''}`;\r\n        if (remaining_months > 0) {\r\n            if (experience) experience += ' ';\r\n            experience += `${remaining_months} month${remaining_months !== 1 ? 's' : ''}`;\r\n        }\r\n\r\n        // Set the calculated value\r\n        frappe.model.set_value(cdt, cdn, 'total_experience', experience || '0 months');\r\n    }\r\n});\r\n\r\n// Keep your existing date conversion code\r\n// [Include all your previous date conversion handlers here]",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Disciplinary Action",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.727538",
+  "module": "ethrm",
+  "name": "Set Start Date Disciplinary Dates",
+  "script": "frappe.ui.form.on('Disciplinary Action', {\r\n    start_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.start_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('start_date_gc', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    start_date_gc: function(frm) {\r\n        const gregorian_date = frm.doc.start_date_gc;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('start_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Disciplinary Action",
+  "enabled": 1,
+  "modified": "2025-06-15 13:15:29.625167",
+  "module": "ethrm",
+  "name": "Set End Date Disciplinary Dates",
+  "script": "frappe.ui.form.on('Disciplinary Action', {\r\n    end_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.end_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('end_date_gc', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    end_date_gc: function(frm) {\r\n        const gregorian_date = frm.doc.end_date_gc;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('end_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Leave Allocation",
+  "enabled": 1,
+  "modified": "2025-06-15 13:14:52.578441",
+  "module": "ethrm",
+  "name": "Convert Leave Allocation",
+  "script": "frappe.ui.form.on('Leave Allocation', {\r\n    custom_from_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_from_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('from_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    from_date2: function(frm) {\r\n        const gregorian_date = frm.doc.from_date;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_from_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Leave Allocation",
+  "enabled": 1,
+  "modified": "2025-06-15 13:14:33.992811",
+  "module": "ethrm",
+  "name": "Convert Leave Allocate To Date",
+  "script": "\r\n\r\nfrappe.ui.form.on('Leave Allocation', {\r\n    custom_to_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_to_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('to_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    to_date2: function(frm) {\r\n        const gregorian_date = frm.doc.from_date;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_to_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Leave Application",
+  "enabled": 1,
+  "modified": "2025-05-24 15:32:32.099927",
+  "module": null,
+  "name": "Leave Application EC to GC for to date fields",
+  "script": "\r\nfrappe.ui.form.on('Leave Application', {\r\n    custom_to_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_to_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('to_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    to_date2: function(frm) {\r\n        const gregorian_date = frm.doc.from_date;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_to_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Leave Application",
+  "enabled": 1,
+  "modified": "2025-06-15 13:14:14.443555",
+  "module": "ethrm",
+  "name": "EC to GC Conversion for Leave Application from date field",
+  "script": "frappe.ui.form.on('Leave Application', {\r\n    custom_from_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.custom_from_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('from_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    from_date2: function(frm) {\r\n        const gregorian_date = frm.doc.from_date;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('custom_from_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Knowledge Base",
+  "enabled": 1,
+  "modified": "2025-06-15 13:13:52.435872",
+  "module": "ethrm",
+  "name": "Preview KB",
+  "script": "frappe.ui.form.on('KB Detail', {\r\n  preview: function(frm, cdt, cdn) {\r\n    const row = locals[cdt][cdn];\r\n\r\n    // 1) Make sure a file is attached\r\n    if (!row.attachment) {\r\n      frappe.msgprint(__('Please attach a file first.'));\r\n      return;\r\n    }\r\n\r\n    // 2) Directly open the stored URL\r\n    //    `row.attachment` is already something like \"/files/your_file.pdf\"\r\n    window.open(row.attachment, '_blank');\r\n  }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee Efficiency",
+  "enabled": 1,
+  "modified": "2025-05-31 15:23:05.400608",
+  "module": "ethrm",
+  "name": "Set Average for Efficiency",
+  "script": "frappe.ui.form.on('Employee Efficiency', {\n    // Trigger the calculation when first_half_result is updated\n    first_half_result: function(frm) {\n        update_average(frm);\n    },\n    // Trigger the calculation when second_half_result is updated\n    second_half_result: function(frm) {\n        update_average(frm);\n    }\n});\n\n// Function to calculate average\nfunction update_average(frm) {\n    let first = frm.doc.first_half_result || 0;\n    let second = frm.doc.second_half_result || 0;\n\n    // Calculate average. If both values are numbers, the average will be computed.\n    let avg = (first + second) / 2;\n\n    // Set the average field with the calculated value\n    frm.set_value('average', avg);\n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee Efficiency",
+  "enabled": 1,
+  "modified": "2025-06-15 13:13:28.687092",
+  "module": "ethrm",
+  "name": "Convert EC to GC and Vise Versa for Efficiency",
+  "script": "frappe.ui.form.on('Employee Efficiency', {\r\n    evaluation_date_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.evaluation_date_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('evaluation_date', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    evaluation_date: function(frm) {\r\n        const gregorian_date = frm.doc.evaluation_date;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('evaluation_date_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee Efficiency",
+  "enabled": 1,
+  "modified": "2025-06-15 13:12:46.203377",
+  "module": "ethrm",
+  "name": "Convert EC to GC Vise Versa for Second Half Efficiency",
+  "script": "frappe.ui.form.on('Employee Efficiency', {\r\n    evaluation_date_second_half_ec: function(frm) {\r\n        const ethiopian_date = frm.doc.evaluation_date_second_half_ec;\r\n\r\n        // Ensure Ethiopian date is exactly 10 characters\r\n        if (!ethiopian_date) {\r\n            frappe.msgprint(__('Invalid Ethiopian date format. It must be in \"DD/MM/YYYY\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.ethiopian_to_gregorian',\r\n            args: { ethiopian_date: ethiopian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('evaluation_date_second_half', r.message);\r\n                }\r\n            }\r\n        });\r\n    },\r\n\r\n    evaluation_date_second_half: function(frm) {\r\n        const gregorian_date = frm.doc.evaluation_date_second_half;\r\n\r\n        // Ensure Gregorian date is exactly 10 characters\r\n        if (!gregorian_date) {\r\n            frappe.msgprint(__('Invalid Gregorian date format. It must be in \"YYYY-MM-DD\" format.'));\r\n            return;\r\n        }\r\n\r\n        frappe.call({\r\n            method: 'ethrm.utils.date_convertor.gregorian_to_ethiopian',\r\n            args: { gregorian_date: gregorian_date },\r\n            callback: function(r) {\r\n                if (r.message) {\r\n                    frm.set_value('evaluation_date_second_half_ec', r.message);\r\n                }\r\n            }\r\n        });\r\n    }\r\n});\r\n",
+  "view": "Form"
+ }
+]
