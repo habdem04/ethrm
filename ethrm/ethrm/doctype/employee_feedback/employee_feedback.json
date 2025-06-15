@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-05-30 10:50:46.785447",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "feedback_to",
+  "feedback_date",
+  "feedback_type",
+  "subject",
+  "feedback_details",
+  "department",
+  "rating",
+  "anonymous"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "feedback_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Feedback Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "feedback_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Feedback Type",
+   "options": "General Feedback\nSuggestion\nComplaint\nPositive Feedback",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Small Text",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "feedback_details",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Feedback Details",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Rating",
+   "label": "Rating (Optional)"
+  },
+  {
+   "default": "0",
+   "fieldname": "anonymous",
+   "fieldtype": "Check",
+   "label": "Submit Anonymously"
+  },
+  {
+   "fieldname": "feedback_to",
+   "fieldtype": "Link",
+   "label": "Feedback To",
+   "options": "User"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-03 13:08:04.164439",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Employee Feedback",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

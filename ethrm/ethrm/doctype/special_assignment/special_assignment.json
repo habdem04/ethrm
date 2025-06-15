@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 19:14:50.583223",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "assignment_description",
+  "section_break_fgjn",
+  "start_date",
+  "column_break_kbmg",
+  "end_date",
+  "section_break_jkku",
+  "progress_rate",
+  "progress_report",
+  "section_break_zowl",
+  "team_members"
+ ],
+ "fields": [
+  {
+   "fieldname": "assignment_description",
+   "fieldtype": "Small Text",
+   "label": "Assignment Description"
+  },
+  {
+   "fieldname": "section_break_fgjn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_kbmg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "section_break_jkku",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "progress_rate",
+   "fieldtype": "Float",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Progress Rate(%)"
+  },
+  {
+   "fieldname": "progress_report",
+   "fieldtype": "Text Editor",
+   "label": "Progress Report"
+  },
+  {
+   "fieldname": "section_break_zowl",
+   "fieldtype": "Section Break",
+   "label": "Team Members"
+  },
+  {
+   "fieldname": "team_members",
+   "fieldtype": "Table",
+   "options": "Assignment Rule User",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-15 13:01:54.415587",
+ "modified_by": "Administrator",
+ "module": "ethrm",
+ "name": "Special Assignment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "assignment_description,start_date,end_date",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "assignment_description",
+ "translated_doctype": 1
+}
